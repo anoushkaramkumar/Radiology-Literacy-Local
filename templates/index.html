@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <br/>
+
+        <h1 class="text-center">Rads-Lit: A Proof of Concept</h1>
+        <br/>
+
+        <div class="container">
+
+        <div class="row">
+            <div class="col-7 border-right">
+            <h4>How to Use:</h4>
+            <p class="font-weight-light">The tool works ideally if you directly enter information from your medical records. For example, copy and paste a note like "Lumbar disc desiccation at L5-S1 with minimal disc bulging and superimposed small central disc herniation deforming the ventral thecal sac without definite nerve root impingement."</p>
+            <form method="post" id = "form" enctype="multipart/form-data">
+
+                <br />
+
+                <label for="medical-problem">Enter the clinical impression section of your Radiology note: (max 1000 characters)</label>
+                <textarea maxlength="1000" class="form-control" type="text" id="medical_problem" name="medical_problem" style="height:100px; padding: 10px; resize:vertical; overflow:auto" required></textarea>
+
+                <br/>
+
+                <label for="radiology_exam"> What type of radiology exam was performed? </label>
+                <select class="form-control" name="radiology_exam" id="radiology_exam" required>
+                    <option value="radiology">Other or Leave Blank</option>
+                    <option value="ct scan">CT/CAT Scan</option>
+                    <option value="fluoroscopy">Fluoroscopy</option>
+                    <option value="MRI">Magnetic resonance imaging (MRI)</option>
+                    <option value="MRA">Magnetic resonance angiography (MRA)</option>
+                    <option value="mammography">Mammography</option>
+                    <option value="xray">X-Ray</option>
+                    <option value="pet scan">PET Scan</option>
+                    <option value="ultrasound">Ultrasound</option>
+                </select>
+
+                <br/>
+
+                <h6 class="disclaimer"><i>
+                    Disclaimer: This information may not be completely accurate or correct. It is used only for educational purposes and
+                    should not be used as a substitute for professional medical advice, diagnosis, or treatment. This tool
+                    is powered by a fine tuned version of Meta's Llama-2-7b-chat model, made to simplify radiology reports for patients. </i></h6>
+                <button id="submit-button" class="btn btn-primary" type="submit">Get Description</button> 
+
+                <button id="loading-button" class="btn btn-primary" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Loading...
+                </button>
+            </div>
+
+            <div class="col-5">
+                <p>Your results will appear below:</p>
+                
+                <input type="hidden" name="full_blurb" id="full_blurb">
+                <div class="container p-0 mb-3">
+                  <div id="input-group" class="input-group d-none">
+                    <button type="button" id="physician_edit" class="btn btn-primary">Edit
+                    </button>
+                    
+                    <span id="copyButton" class="input-group-addon btn d-none" title="Click to copy">
+                      Copy
+                    </span>
+
+                    <span class="copied">Copied !</span>
+                  </div>
+                </div>
+
+
+                <p id="description" style="max-width: 750px">
+                </p>
+                <textarea class="form-control d-none" style="height: 550px;" id="edit_box" ></textarea>
+            </div>
+
+
+        </form>
+        <br/>
+
+        
+        
+    </div>
+
+
+    <script type="text/javascript" src="/static/script.js"></script>
+{% endblock %}
